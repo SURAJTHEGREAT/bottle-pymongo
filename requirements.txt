@@ -1,0 +1,6 @@
+pymongo
+bottle
+cgi
+re
+logging
+oslo_config
