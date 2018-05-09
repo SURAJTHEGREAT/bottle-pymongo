@@ -346,7 +346,7 @@ database = connection.blog
 posts = blogPostDAO.BlogPostDAO(database)
 users = userDAO.UserDAO(database)
 sessions = sessionDAO.SessionDAO(database)
-bottle.TEMPLATE_PATH.insert(0, 'views')
+bottle.TEMPLATE_PATH.insert(0, os.path.dirname(__file__) + '/views')
 bottle.debug(True)
 bottle.run(host='0.0.0.0', port=8082)         # Start the webserver running and wait for requests
 
