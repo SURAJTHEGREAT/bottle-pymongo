@@ -339,7 +339,7 @@ try:
     LOG.info("Got the pointer")
     host_name=pointer.database.host
     LOG.info("The hostname is")
-    LOG.info(hostname)
+    LOG.info(host_name)
     port=pointer.database.port
     LOG.info("The port is")
     LOG.info(port)
