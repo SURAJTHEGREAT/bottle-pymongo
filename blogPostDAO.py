@@ -98,7 +98,13 @@ class BlogPostDAO:
 
         post = None
         # XXX 3.2 Work here to retrieve the specified post
+        query = { 'permalink': permalink }
 
+        try:
+            post = self.posts.find_one(query)
+            print "Getting the post by its permalink"
+        except:
+            print "Error getting post"
         if post is not None:
             # fix up date
             post['date'] = post['date'].strftime("%A, %B %d %Y at %I:%M%p")
