@@ -35,7 +35,7 @@ def do_register_cli_opts(opt, ignore_errors=False):
 def register_opts(file_name):
     LOG.info("Into register method")
     LOG.info("The filename is")
-    LOG.info(filename)
+    LOG.info(file_name)
     db_opts = [
 
     cfg.BoolOpt('db_enable',default=False),
