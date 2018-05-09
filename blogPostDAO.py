@@ -54,6 +54,7 @@ class BlogPostDAO:
         # now insert the post
         try:
             # XXX HW 3.2 Work Here to insert the post
+            self.posts.insert_one(post)
             print "Inserting the post"
         except:
             print "Error inserting post"
@@ -67,7 +68,14 @@ class BlogPostDAO:
         cursor = iter(())  # Using an empty itable for a placeholder so blog compiles before you make your changes
 
         # XXX HW 3.2 Work here to get the posts
-
+        query = { }
+        
+        try:
+            cursor = self.posts.find(query).sort('date', -1).limit(num_posts)
+            print "Getting the post by its permalink"
+        except:
+            print "Error getting post"
+            
         l = []
 
         for post in cursor:
