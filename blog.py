@@ -330,16 +330,27 @@ def validate_signup(username, password, verify, email, errors):
             errors['email_error'] = "invalid email address"
             return False
     return True
+LOG.info("Initializing class")
+try:
+    path=os.getenv('CONFIG_PATH')
+    LOG.info("The path is")
+    LOG.info(path)
+    pointer=config.conf_file(path)
+    LOG.info("Got the pointer")
+    host_name=pointer.database.host
+    LOG.info("The hostname is")
+    LOG.info(hostname)
+    port=pointer.database.port
+    LOG.info("The port is")
+    LOG.info(port)
 
-path=os.getenv('CONFIG_PATH')
-pointer=config.conf_file(path)
-host_name=pointer.database.host
-port=pointer.database.port
-connection = pymongo.MongoClient(host_name,port)
+except Exception as e:
+    LOG.info("The error is")
+    LOG.info(e)    
 database = connection.blog
 posts = blogPostDAO.BlogPostDAO(database)
 users = userDAO.UserDAO(database)
 sessions = sessionDAO.SessionDAO(database)
 bottle.debug(True)
-bottle.run(host='localhost', port=8082)         # Start the webserver running and wait for requests
+bottle.run(host='0.0.0.0', port=8082)         # Start the webserver running and wait for requests
 
