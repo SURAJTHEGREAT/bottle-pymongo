@@ -335,7 +335,7 @@ try:
     path=os.getenv('CONFIG_PATH')
     LOG.info("The path is")
     LOG.info(path)
-    pointer=config.conf_file(path)
+    pointer=config.conf_file([path])
     LOG.info("Got the pointer")
     host_name=pointer.database.host
     LOG.info("The hostname is")
