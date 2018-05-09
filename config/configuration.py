@@ -4,7 +4,7 @@ import os
 from logger.log import getLogger
 
 # GENERATE THE LOG PATH FROM CURRENT FILE NAME
-logpath = '/var/log'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
+logpath = '/var/log/'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
 
 LOG = getLogger(__name__,logpath)
 
@@ -34,6 +34,8 @@ def do_register_cli_opts(opt, ignore_errors=False):
 
 def register_opts(file_name):
     LOG.info("Into register method")
+    LOG.info("The filename is")
+    LOG.info(filename)
     db_opts = [
 
     cfg.BoolOpt('db_enable',default=False),
@@ -56,11 +58,15 @@ def register_opts(file_name):
     cli_opts = [debug, profile]
     do_register_cli_opts(cli_opts)
     cfg.CONF(default_config_files=file_name)
+    LOG.info("cfg.CONF is")
+    LOG.info(cfg.CONF)
     return cfg.CONF
 
 def conf_file(args=None):
     LOG.info("Into parse args method")
     pointer=register_opts(args)
+    LOG.info("The pointer is")
+    LOG.info(pointer)
     return pointer
 
 
