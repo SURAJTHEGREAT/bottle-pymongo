@@ -115,9 +115,20 @@ class BlogPostDAO:
 
         try:
             # XXX HW 3.3 Work here to add the comment to the designated post. When done, modify the line below to return the number of documents updated by your modification, rather than just -1.
+            query = { 'permalink': permalink }
+            post_find = self.posts.find_one(query)          # finding post in which comment is be added 
+            
+            comment_list = post_find['comments']             # storing comments in a list
+            comment_list.append(comment)                    # appending new comment in the list
+            
+            update = { '$set': {'comments': comment_list} }  
+            self.posts.update_one(query, update, upsert=True)   # updating the document by the new list   
+            
+            post_find = self.posts.find_one(query)          # finding post in which comment is be added 
 
-            return -1  # Change this to return the number of documents updated by the code for HW 3.3
+            return post_find  # Change this to return the number of documents updated by the code for HW 3.3            
 
+        
         except:
             print "Could not update the collection, error"
             print "Unexpected error:", sys.exc_info()[0]
