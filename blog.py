@@ -30,7 +30,7 @@ import config.configuration as config
 from logger.log import getLogger
 
 # GENERATE THE LOG PATH FROM CURRENT FILE NAME
-logpath = '/var/log'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
+logpath = '/var/log/'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
 
 LOG = getLogger(__name__,logpath)
 
@@ -343,7 +343,7 @@ try:
     port=pointer.database.port
     LOG.info("The port is")
     LOG.info(port)
-
+    connection = pymongo.MongoClient(host_name,port)
 except Exception as e:
     LOG.info("The error is")
     LOG.info(e)    
