@@ -14,6 +14,7 @@ PortType = types.Integer(1, 65535)
 def do_register_opts(opts, group=None, ignore_errors=False):
     try:
         cfg.CONF.register_opts(opts, group=group)
+        LOG.info("Into function do_register")
     except:
         if not ignore_errors:
             raise
@@ -25,9 +26,11 @@ def do_register_cli_opts(opt, ignore_errors=False):
         opts = [opt]
     else:
         opts = opt
-
+    LOG.info("The opts is")
+    LOG.info(opts)
     try:
         cfg.CONF.register_cli_opts(opts)
+        LOG.info("Calling registercliopts")
     except:
         if not ignore_errors:
             raise
