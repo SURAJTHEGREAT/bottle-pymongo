@@ -333,17 +333,12 @@ def validate_signup(username, password, verify, email, errors):
 LOG.info("Initializing class")
 try:
     path=os.getenv('CONFIG_PATH')
-    LOG.info("The path is")
-    LOG.info(path)
     pointer=config.conf_file([path])
-    LOG.info("Got the pointer")
     host_name=pointer.database.host
-    LOG.info("The hostname is")
-    LOG.info(host_name)
+    LOG.info("host is")
+    LOG.info(type(host_name))
     port=pointer.database.port
-    LOG.info("The port is")
-    LOG.info(port)
-    connection = pymongo.MongoClient(host_name,port)
+    connection=pymongo.MongoClient(host_name,port)
 except Exception as e:
     LOG.info("The error is")
     LOG.info(e)    
