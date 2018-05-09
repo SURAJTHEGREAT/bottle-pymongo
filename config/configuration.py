@@ -64,7 +64,11 @@ def register_opts(file_name):
 
 def conf_file(args=None):
     LOG.info("Into parse args method")
-    pointer=register_opts(args)
+    try:
+        pointer=register_opts(args)
+    except Exception as e:
+        LOG.info("The error is")
+        LOG.info(e)
     LOG.info("The pointer is")
     LOG.info(pointer)
     return pointer
