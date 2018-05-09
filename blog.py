@@ -335,8 +335,6 @@ try:
     path=os.getenv('CONFIG_PATH')
     pointer=config.conf_file([path])
     host_name=pointer.database.host
-    LOG.info("host is")
-    LOG.info(type(host_name))
     port=pointer.database.port
     connection=pymongo.MongoClient(host_name,port)
 except Exception as e:
