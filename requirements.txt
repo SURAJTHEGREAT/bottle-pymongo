@@ -2,3 +2,4 @@ pymongo
 bottle
 logging
 oslo_config
+pytest
