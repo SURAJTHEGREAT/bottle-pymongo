@@ -75,7 +75,9 @@ def show_post(permalink="notfound"):
     username = sessions.get_username(cookie)
     permalink = cgi.escape(permalink)
 
-    print "about to query on permalink = ", permalink
+    #print "about to query on permalink = ", permalink
+    LOG.info ("about to query on permalink = ")
+    LOG.info (permalink)
     post = posts.get_post_by_permalink(permalink)
 
     if post is None:
@@ -333,17 +335,21 @@ def validate_signup(username, password, verify, email, errors):
 LOG.info("Initializing class")
 try:
     path=os.getenv('CONFIG_PATH')
+    # TO GET THE POINTER OF OSLO_CONFIG BASED ON FILENAME
     pointer=config.conf_file([path])
     host_name=pointer.database.host
     port=pointer.database.port
+    #CONNECTION TO MONGOCLIENT IS ESTABLISHED
     connection=pymongo.MongoClient(host_name,port)
 except Exception as e:
     LOG.info("The error is")
-    LOG.info(e)    
+    LOG.info(e)  
+#INITIALIZE DB    
 database = connection.blog
 posts = blogPostDAO.BlogPostDAO(database)
 users = userDAO.UserDAO(database)
 sessions = sessionDAO.SessionDAO(database)
+# SINCE IT IS EXECUTED FROM DIFFERENT PATH INSIDE DOCKER CONTAINER - TO DISCOVER VIEWS 
 bottle.TEMPLATE_PATH.insert(0, os.path.dirname(__file__) + '/views')
 bottle.debug(True)
 bottle.run(host='0.0.0.0', port=8082)         # Start the webserver running and wait for requests
