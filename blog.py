@@ -150,7 +150,10 @@ def post_newpost():
     title = bottle.request.forms.get("subject")
     post = bottle.request.forms.get("body")
     tags = bottle.request.forms.get("tags")
-
+    LOG.info ("The title is to check what is CGI Escape")
+    LOG.info (title)
+    LOG.info ("The post or body is is to check what is CGI Escape")
+    LOG.info (post)
     cookie = bottle.request.get_cookie("session")
     username = sessions.get_username(cookie)  # see if user is logged in
     if username is None:
