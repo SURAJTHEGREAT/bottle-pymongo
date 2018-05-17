@@ -23,7 +23,8 @@ setup(
     scripts=[],
     provides=['blog'],
     packages=find_packages(),
-    install_requires=['pymongo','bottle','logging','oslo_config','pytest']
+    install_requires=['pymongo','bottle','logging','oslo_config','pytest'],
+    zip_safe=False
 )
 
 
