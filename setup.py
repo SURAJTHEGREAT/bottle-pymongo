@@ -20,10 +20,10 @@ setup(
         'Intended Audience :: Developers',
         'Environment :: Console',
     ],
-    scripts=[],
-    provides=['blog'],
+    scripts=['app/blog'],
     packages=find_packages(),
-    install_requires=['pymongo','bottle','logging','oslo_config','pytest'],
+    include_package_data=True,
+    install_requires=['pymongo','bottle','logging','pytest'],
     zip_safe=False
 )
 

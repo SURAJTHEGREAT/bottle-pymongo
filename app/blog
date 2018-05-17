@@ -17,11 +17,9 @@
 #
 
 
-
+from __future__ import absolute_import
 import pymongo
-import blogPostDAO
-import sessionDAO
-import userDAO
+from app import blogPostDAO,sessionDAO,userDAO
 import bottle
 import cgi
 import re
