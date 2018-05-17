@@ -20,7 +20,6 @@ setup(
         'Intended Audience :: Developers',
         'Environment :: Console',
     ],
-    scripts=[''],
     packages=find_packages(),
     include_package_data=True,
     data_files=[('app/views/',['app/views/blog_template.tpl','app/views/entry_template.tpl','app/views/error_template.tpl','app/views/login.tpl','app/views/newpost_template.tpl','app/views/signup.tpl','app/views/welcome.tpl'])], 
