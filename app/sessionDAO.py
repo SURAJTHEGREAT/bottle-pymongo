@@ -20,7 +20,12 @@ __author__ = 'aje'
 import sys
 import random
 import string
+from logger_suraj.log import getLogger
 
+# GENERATE THE LOG PATH FROM CURRENT FILE NAME
+logpath = '/var/log/'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
+
+LOG = getLogger(__name__,logpath)
 
 # The session Data Access Object handles interactions with the sessions collection
 
@@ -40,7 +45,7 @@ class SessionDAO:
         try:
             self.sessions.insert_one(session)
         except:
-            print "Unexpected error on start_session:", sys.exc_info()[0]
+            LOG.info("Unexpected error on start_session:", sys.exc_info()[0])
             return None
 
         return str(session['_id'])
