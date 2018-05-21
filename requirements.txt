@@ -1,5 +1,5 @@
 pymongo
 bottle
-logging
-oslo_config
+config_suraj
+log_suraj
 pytest
