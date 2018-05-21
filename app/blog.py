@@ -24,8 +24,8 @@ import bottle
 import cgi
 import re
 import os
-import config.configuration as config
-from logger.log import getLogger
+import config_suraj.configuration as config
+from logger_suraj.log import getLogger
 
 # GENERATE THE LOG PATH FROM CURRENT FILE NAME
 logpath = '/var/log/'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
