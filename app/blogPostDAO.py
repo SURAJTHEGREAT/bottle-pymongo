@@ -21,6 +21,12 @@ __author__ = 'aje'
 import sys
 import re
 import datetime
+from logger_suraj.log import getLogger
+
+# GENERATE THE LOG PATH FROM CURRENT FILE NAME
+logpath = '/var/log/'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
+
+LOG = getLogger(__name__,logpath)
 
 
 # The Blog Post Data Access Object handles interactions with the Posts collection
@@ -33,7 +39,7 @@ class BlogPostDAO:
 
     # inserts the blog entry and returns a permalink for the entry
     def insert_entry(self, title, post, tags_array, author):
-        print "inserting blog entry", title, post
+        LOG.info("inserting blog entry", title, post)
 
         # fix up the permalink to not include whitespace
 
@@ -55,10 +61,10 @@ class BlogPostDAO:
         try:
             # XXX HW 3.2 Work Here to insert the post
             self.posts.insert_one(post)
-            print "Inserting the post"
+            LOG.info("Inserting the post")
         except:
-            print "Error inserting post"
-            print "Unexpected error:", sys.exc_info()[0]
+            LOG.info("Error inserting post")
+            LOG.info("Unexpected error:", sys.exc_info()[0])
 
         return permalink
 
@@ -72,9 +78,9 @@ class BlogPostDAO:
         
         try:
             cursor = self.posts.find(query).sort('date', -1).limit(num_posts)
-            print "Getting the post by its permalink"
+            LOG.info("Getting the post by its permalink")
         except:
-            print "Error getting post"
+            LOG.info("Error getting post")
             
         l = []
 
@@ -102,9 +108,9 @@ class BlogPostDAO:
 
         try:
             post = self.posts.find_one(query)
-            print "Getting the post by its permalink"
+            LOG.info("Getting the post by its permalink")
         except:
-            print "Error getting post"
+            LOG.info("Error getting post")
         if post is not None:
             # fix up date
             post['date'] = post['date'].strftime("%A, %B %d %Y at %I:%M%p")
@@ -136,6 +142,6 @@ class BlogPostDAO:
 
         
         except:
-            print "Could not update the collection, error"
-            print "Unexpected error:", sys.exc_info()[0]
+            LOG.info("Could not update the collection, error")
+            LOG.info("Unexpected error:", sys.exc_info()[0])
             return 0
