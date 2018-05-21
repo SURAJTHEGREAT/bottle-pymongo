@@ -1,5 +1,3 @@
-
-
 #
 # Copyright (c) 2008 - 2013 10gen, Inc. <http://10gen.com>
 #
@@ -21,7 +19,12 @@ import random
 import string
 import hashlib
 import pymongo
+from logger_suraj.log import getLogger
 
+# GENERATE THE LOG PATH FROM CURRENT FILE NAME
+logpath = '/var/log/'+ os.path.splitext(os.path.basename(__file__))[0] + '.log'
+
+LOG = getLogger(__name__,logpath)
 
 # The User Data Access Object handles all interactions with the User collection.
 class UserDAO:
@@ -55,16 +58,16 @@ class UserDAO:
         try:
             user = self.users.find_one({'_id': username})
         except:
-            print "Unable to query database for user"
+            LOG.info("Unable to query database for user")
 
         if user is None:
-            print "User not in database"
+            LOG.info("User not in database")
             return None
 
         salt = user['password'].split(',')[1]
 
         if user['password'] != self.make_pw_hash(password, salt):
-            print "user password is not a match"
+            LOG.info("user password is not a match")
             return None
 
         # Looks good
@@ -82,10 +85,10 @@ class UserDAO:
         try:
             self.users.insert_one(user)
         except pymongo.errors.OperationFailure:
-            print "oops, mongo error"
+            LOG.info("oops, mongo error")
             return False
         except pymongo.errors.DuplicateKeyError as e:
-            print "oops, username is already taken"
+            LOG.info("oops, username is already taken")
             return False
 
         return True
